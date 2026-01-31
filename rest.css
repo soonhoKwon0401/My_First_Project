@@ -1,0 +1,80 @@
+/* =========================================
+   Modern CSS Reset (practical)
+   ========================================= */
+
+/* 1) Box sizing: padding/border 포함한 계산으로 통일 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2) 기본 margin 제거 */
+* {
+  margin: 0;
+}
+
+/* 3) 기본 높이/텍스트 렌더링 개선 */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; /* macOS에서 글자 부드럽게 */
+  text-rendering: optimizeLegibility;
+}
+
+/* 4) 미디어 요소 기본 동작 정리 */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 5) 폼 요소: 폰트 상속 + 기본 스타일 튀는 것 방지 */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* 버튼 커서 */
+button {
+  cursor: pointer;
+}
+
+/* textarea는 기본적으로 세로 리사이즈만 허용(원하면 삭제) */
+textarea {
+  resize: vertical;
+}
+
+/* 6) 텍스트 줄바꿈 폭발 방지 */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 7) 링크 기본 스타일(원하면 유지해도 됨) */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
