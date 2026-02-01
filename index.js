@@ -13,27 +13,14 @@ goToAddPage.addEventListener("click", (event) => {
   render();
 });
 
-const routes = {
-  "/": () => `<div class="add__content__container">
-                  <h2 class="add__content-title">단어를 추가해보세요</h2>
-                  <button type="button"class="add__content__button" data-link="/add">추가하기</button>
-              </div>`,
-  "/add": () => `<div class="add__content__container">
-              <div class="add__content__header">
-                <div class="add__content__header-info">
-                  <span class="add__content_id"> 1 </span>
-                </div>
-                <div class="add__content__header-menu">
-                  <button class="add__content__delete-card">
-                  
-                  </button>
-                  <button class="add__content__menu-detail">
+// const routes = {
+//   "/": () => `<div class="add__content__container">
+//                   <h2 class="add__content-title">단어를 추가해보세요</h2>
+//                   <button type="button"class="add__content__button" data-link="/add">추가하기</button>
+//               </div>`,
 
-                  </button>
-                </div>
-              </div>
-            </div>`,
-};
+//   "/add": () => ``,
+// };
 
 function getCurrentPath() {
   return window.location.pathname;

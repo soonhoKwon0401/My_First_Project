@@ -76,3 +76,14 @@ body {
   height: 50px;
   font-size: 24px;
 }
+
+.content__container__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content__input-box__more-button {
+  width: 200px;
+  height: 50px;
+}
