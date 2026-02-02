@@ -58,6 +58,10 @@ body {
   background-color: gray;
 }
 
+.app__content__card__inner {
+  padding: 20px;
+}
+
 .add__content__container {
   flex: 1;
   display: flex;
@@ -71,6 +75,11 @@ body {
   justify-content: space-between;
 }
 
+.content__numbers {
+  display: flex;
+  align-items: center;
+}
+
 .add__content__button {
   width: 200px;
   height: 50px;
@@ -79,16 +88,25 @@ body {
 
 .content__container__header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 
+.content__input-box__menu {
+  display: flex;
+}
+
 .content__input-box_delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
 }
 
 .content__input-box__more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
 }
