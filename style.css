@@ -83,7 +83,22 @@ body {
   justify-content: space-between;
 }
 
+.content__input-box_delete-button {
+  width: 30px;
+  height: 30px;
+}
+
 .content__input-box__more-button {
-  width: 200px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
+}
+
+.content__container__text-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__container__label {
+  display: flex;
+  justify-content: space-between;
 }
