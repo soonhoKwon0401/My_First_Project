@@ -11,6 +11,7 @@ goToAddPage.addEventListener("click", (event) => {
   const url = linkEl.dataset.link;
   history.pushState({}, "", url);
   render();
+  s;
 });
 
 // const routes = {
