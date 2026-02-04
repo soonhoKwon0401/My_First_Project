@@ -1,5 +1,12 @@
 "use strict";
 
+const words = [];
+
+localStorage.setItem("words", JSON.stringify(words));
+
+const saveWords = localStorage.getItem("words");
+const word = JSON.parse(saveWords);
+
 const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content-card");
 

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="rest.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-    s
   </head>
   <body>
     <div class="app">
@@ -85,18 +84,28 @@
                   </button>
                 </div>
               </div>
-              <div class="content__container__text-box">
-                <input
-                  type="text"
-                  id="sentence"
-                  class="content__text-box__sentence"
-                />
-                <input type="text" id="mean" class="content__text-box__mean" />
-              </div>
-              <div class="content__container__label">
-                <label for="sentence" class="label__sentence">문장</label>
-                <label for="mean" class="label__mean">뜻</label>
-              </div>
+              <form class="content__container__text-box">
+                <div class="content__sentence__inner">
+                  <input
+                    type="text"
+                    id="sentence"
+                    class="content__text-box__sentence"
+                  />
+                  <label for="sentence" class="label__sentence">문장</label>
+                </div>
+                <div class="content__mean__inner">
+                  <input
+                    type="text"
+                    id="mean"
+                    class="content__text-box__mean"
+                  />
+                  <label for="mean" class="label__mean">뜻</label>
+                </div>
+                <button class="content_text-box__submit" type="submit">
+                  저장
+                </button>
+              </form>
+              <div class="content__container__label"></div>
             </div>
           </div>
         </main>

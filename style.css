@@ -116,12 +116,17 @@ body {
   justify-content: space-between;
 }
 
+.content__sentence__inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__mean__inner {
+  display: flex;
+  flex-direction: column;
+}
+
 .content__text-box__sentence:focus,
 .content__text-box__mean:focus {
   box-shadow: 0 0 0 3px slateblue;
-}
-
-.content__container__label {
-  display: flex;
-  justify-content: space-between;
 }
