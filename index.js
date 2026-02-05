@@ -2,10 +2,19 @@
 
 const words = [];
 
-localStorage.setItem("words", JSON.stringify(words));
+words.push({
+  word: "apple",
+  meaning: "사과",
+});
 
-const saveWords = localStorage.getItem("words");
+localStorage.setItem("name", JSON.stringify(words));
+
+console.log(words);
+
+const saveWords = localStorage.getItem("name");
+console.log(typeof saveWords);
 const word = JSON.parse(saveWords);
+console.log(typeof saveWords);
 
 const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content-card");
