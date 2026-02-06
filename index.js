@@ -1,23 +1,11 @@
 "use strict";
 
-const words = [];
-
-words.push({
-  word: "apple",
-  meaning: "사과",
-});
-
-localStorage.setItem("name", JSON.stringify(words));
-
-console.log(words);
-
-const saveWords = localStorage.getItem("name");
-console.log(typeof saveWords);
-const word = JSON.parse(saveWords);
-console.log(typeof saveWords);
-
 const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content-card");
+
+const wordForm = document.querySelector(".content__container__text-box");
+const sentenceInput = document.queSelector("#sentence");
+const meanInput = document.querySelector("#mean");
 
 goToAddPage.addEventListener("click", (event) => {
   const linkEl = event.target.closest("[data-link]");
