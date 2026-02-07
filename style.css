@@ -53,7 +53,7 @@ body {
   gap: 10px;
   width: 100%;
   max-width: 800px;
-  min-height: 200px;
+  min-height: 120px;
   margin-inline: auto;
   background-color: gray;
 }
