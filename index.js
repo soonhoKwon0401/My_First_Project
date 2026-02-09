@@ -58,6 +58,45 @@ const setWordCardId = (id) => {
 renderWordCardHeard(appContentInner, createWordCardHeard(true));
 setWordCardId("1");
 
+const createWordCardInput = (leftText = "문장", rightText = "뜻") => {
+  return `
+  <form class="content__container__form__text-box" id="text-box">
+    <div class="content__container__text-box">
+      <div class="content__sentence__inner">
+        <input
+          type="text"
+          id="sentence"
+          class="content__text-box__sentence"
+        />
+        <label for="sentence" class="label__sentence">${leftText}</label>
+      </div>
+      <div class="content__mean__inner">
+        <input
+          type="text"
+          id="mean"
+          class="content__text-box__mean"
+        />
+        <label for="mean" class="label__mean">${rightText}</label>
+      </div>
+      <div class="content_text-box__submit_inner">
+        <button
+          class="content_text-box__submit"
+          type="submit"
+          form="text-box"
+        >
+          저장
+        </button>
+      </div>
+    </div>
+  </form>`;
+};
+
+const renderWordCardInput = (container, html) => {
+  container.insertAdjacentHTML("beforeend", html);
+};
+
+renderWordCardInput(appContentInner, createWordCardInput("하늘", "헬로"));
+
 wordForm.addEventListener("submit", (event) => {
   event.preventDefault();
   getInputValue();
