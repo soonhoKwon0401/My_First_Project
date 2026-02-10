@@ -131,7 +131,18 @@ body {
   box-shadow: 0 0 0 3px slateblue;
 }
 
+.app__content__card__text-box {
+  display: flex;
+  flex-direction: low;
+  justify-content: space-between;
+}
+
 .app__content_card__text-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__card__mean-text {
   display: flex;
   flex-direction: column;
 }

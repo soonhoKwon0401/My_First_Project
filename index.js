@@ -95,7 +95,29 @@ const renderWordInput = (container, html) => {
   container.insertAdjacentHTML("beforeend", html);
 };
 
-// renderWordInput(appContentInner, createWordInput("하늘", "헬로"));
+const createWord = (sentence = "문장", mean = "뜻") => {
+  return `
+  <div class="app__content__card__text-box">
+    <div class="app__content_card__text-inner">
+      <span class="content__card__sentence-text" id="sentence"
+        >${sentence}</span
+      >
+      <label for="sentence" class="label__sentence">문장</label>
+    </div>
+    <div class="content__card__mean-text" id="mean">
+      <span class="content__card__mean-text">${mean}</span>
+      <label for="mean  " class="label__mean">뜻</label>
+    </div>
+  </div>
+  `;
+};
+
+const renderWord = (container, html) => {
+  container.insertAdjacentHTML("beforeend", html);
+};
+
+renderWordInput(appContentInner, createWordInput("하늘", "헬로"));
+renderWord(appContentInner, createWord("하이", "헬로"));
 
 wordForm.addEventListener("submit", (event) => {
   event.preventDefault();
