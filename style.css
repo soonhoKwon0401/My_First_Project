@@ -130,3 +130,8 @@ body {
 .content__text-box__mean:focus {
   box-shadow: 0 0 0 3px slateblue;
 }
+
+.app__content_card__text-inner {
+  display: flex;
+  flex-direction: column;
+}

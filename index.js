@@ -58,7 +58,7 @@ const setWordCardId = (id) => {
 renderWordCardHeard(appContentInner, createWordCardHeard(true));
 setWordCardId("1");
 
-const createWordCardInput = (leftText = "문장", rightText = "뜻") => {
+const createWordInput = (leftText = "문장", rightText = "뜻") => {
   return `
   <form class="content__container__form__text-box" id="text-box">
     <div class="content__container__text-box">
@@ -91,11 +91,11 @@ const createWordCardInput = (leftText = "문장", rightText = "뜻") => {
   </form>`;
 };
 
-const renderWordCardInput = (container, html) => {
+const renderWordInput = (container, html) => {
   container.insertAdjacentHTML("beforeend", html);
 };
 
-renderWordCardInput(appContentInner, createWordCardInput("하늘", "헬로"));
+// renderWordInput(appContentInner, createWordInput("하늘", "헬로"));
 
 wordForm.addEventListener("submit", (event) => {
   event.preventDefault();
