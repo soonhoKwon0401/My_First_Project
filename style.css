@@ -112,7 +112,9 @@ body {
 }
 
 .content__container__text-box {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px;
+  gap: 10px;
   justify-content: space-between;
 }
 
@@ -132,17 +134,17 @@ body {
 }
 
 .app__content__card__text-box {
-  display: flex;
-  flex-direction: low;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px;
+  gap: 10px;
 }
 
 .app__content_card__text-inner {
   display: flex;
   flex-direction: column;
 }
-
 .content__card__mean-text {
   display: flex;
   flex-direction: column;
+  grid-column: 2 / 4;
 }

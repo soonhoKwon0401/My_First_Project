@@ -78,7 +78,6 @@ const createWordInput = (leftText = "문장", rightText = "뜻") => {
         />
         <label for="mean" class="label__mean">${rightText}</label>
       </div>
-      <div class="content_text-box__submit_inner">
         <button
           class="content_text-box__submit"
           type="submit"
@@ -86,7 +85,6 @@ const createWordInput = (leftText = "문장", rightText = "뜻") => {
         >
           저장
         </button>
-      </div>
     </div>
   </form>`;
 };
@@ -105,7 +103,7 @@ const createWord = (sentence = "문장", mean = "뜻") => {
       <label for="sentence" class="label__sentence">문장</label>
     </div>
     <div class="content__card__mean-text" id="mean">
-      <span class="content__card__mean-text">${mean}</span>
+      <span class="content__card__mean">${mean}</span>
       <label for="mean  " class="label__mean">뜻</label>
     </div>
   </div>
