@@ -98,6 +98,10 @@ const createWord = (sentence = "문장", mean = "뜻") =>
   </div>
   `;
 
+const WordCard = ({}) => `
+  ${createWordCardHeard({ id, showMenu })}
+  `;
+
 const renderWordCardHeard = (container, html) => {
   container.insertAdjacentHTML("afterbegin", html);
 };
