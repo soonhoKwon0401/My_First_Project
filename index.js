@@ -100,8 +100,9 @@ const createWord = (sentence = "문장", mean = "뜻") =>
 
 const WordCard = ({}) => `
   ${createWordCardHeard({ id, showMenu })}
+  ${ShowInput ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
   `;
-
+// 매개변수에 따라 보여지는 화면이 달라야함
 const renderWordCardHeard = (container, html) => {
   container.insertAdjacentHTML("afterbegin", html);
 };
