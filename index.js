@@ -39,10 +39,10 @@ const createWordCardSideMenu = `
                 </div>
 `;
 
-const createWordCardHeard = (showMenu = false) =>
+const createWordCardHeard = ({ id, showMenu = false }) =>
   `
     <div class="content__container__header">
-      <span class="content__numbers"></span>
+      <span class="content__numbers">${id}</span>
       ${showMenu ? createWordCardSideMenu : ""}
     </div>
   `;
@@ -51,7 +51,7 @@ const setWordCardId = (id) => {
   document.querySelector(".content__numbers").textContent = id;
 };
 
-const createWordInput = (leftText = "문장", rightText = "뜻") =>
+const createWordInput = ({ sentence = "문장", mean = "뜻" }) =>
   `
     <form class="content__container__form__text-box" id="text-box">
       <div class="content__container__text-box">
@@ -61,7 +61,7 @@ const createWordInput = (leftText = "문장", rightText = "뜻") =>
             id="sentence"
             class="content__text-box__sentence"
           />
-          <label for="sentence" class="label__sentence">${leftText}</label>
+          <label for="sentence" class="label__sentence">${sentence}</label>
         </div>
         <div class="content__mean__inner">
           <input
@@ -69,7 +69,7 @@ const createWordInput = (leftText = "문장", rightText = "뜻") =>
             id="mean"
             class="content__text-box__mean"
           />
-          <label for="mean" class="label__mean">${rightText}</label>
+          <label for="mean" class="label__mean">${mean}</label>
         </div>
           <button
             class="content_text-box__submit"
@@ -82,7 +82,7 @@ const createWordInput = (leftText = "문장", rightText = "뜻") =>
     </form>
   `;
 
-const createWord = (sentence = "문장", mean = "뜻") =>
+const createWord = ({ sentence = "문장", mean = "뜻" }) =>
   `
   <div class="app__content__card__text-box">
     <div class="app__content_card__text-inner">
@@ -98,26 +98,40 @@ const createWord = (sentence = "문장", mean = "뜻") =>
   </div>
   `;
 
-const WordCard = ({}) => `
+const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
   ${createWordCardHeard({ id, showMenu })}
-  ${ShowInput ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
+  ${
+    mode === "edit"
+      ? createWordInput({ sentence, mean })
+      : createWord({ sentence, mean })
+  }
   `;
 // 매개변수에 따라 보여지는 화면이 달라야함
-const renderWordCardHeard = (container, html) => {
-  container.insertAdjacentHTML("afterbegin", html);
+
+const cardDate = {
+  id: "number",
+  sentence: "왼쪽 문구",
+  mean: "오른쪽 문구",
+  mode: "edit",
+  showMenu: true,
 };
 
-const renderWordInput = (container, html) => {
-  container.insertAdjacentHTML("beforeend", html);
-};
+appContentInner.innerHTML = wordCard(cardDate);
+// const renderWordCardHeard = (container, html) => {
+//   container.insertAdjacentHTML("afterbegin", html);
+// };
 
-const renderWord = (container, html) => {
-  container.insertAdjacentHTML("beforeend", html);
-};
-renderWordCardHeard(appContentInner, createWordCardHeard(true));
-setWordCardId("1");
-renderWordInput(appContentInner, createWordInput("워드", "인풋"));
-renderWord(appContentInner, createWord("그냥", "워드"));
+// const renderWordInput = (container, html) => {
+//   container.insertAdjacentHTML("beforeend", html);
+// };
+
+// const renderWord = (container, html) => {
+//   container.insertAdjacentHTML("beforeend", html);
+// };
+// renderWordCardHeard(appContentInner, createWordCardHeard(true));
+// setWordCardId("1");
+// renderWordInput(appContentInner, createWordInput("워드", "인풋"));
+// renderWord(appContentInner, createWord("그냥", "워드"));
 
 wordForm.addEventListener("submit", (event) => {
   event.preventDefault();
