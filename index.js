@@ -1,13 +1,8 @@
 "use strict";
 
-const mainContent = document.querySelector(".app__content");
 const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content-card");
 const appContentInner = document.querySelector(".app__content__card__inner");
-
-const wordForm = document.querySelector(".content__container__form__text-box");
-const sentenceInput = document.querySelector("#sentence");
-const meanInput = document.querySelector("#mean");
 
 const createWordCardSideMenu = `
 <div class="content__input-box__menu">
@@ -106,7 +101,6 @@ const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
       : createWord({ sentence, mean })
   }
   `;
-// 매개변수에 따라 보여지는 화면이 달라야함
 
 const cardDate = {
   id: "number",
@@ -117,26 +111,11 @@ const cardDate = {
 };
 
 appContentInner.innerHTML = wordCard(cardDate);
-// const renderWordCardHeard = (container, html) => {
-//   container.insertAdjacentHTML("afterbegin", html);
-// };
 
-// const renderWordInput = (container, html) => {
-//   container.insertAdjacentHTML("beforeend", html);
-// };
-
-// const renderWord = (container, html) => {
-//   container.insertAdjacentHTML("beforeend", html);
-// };
-// renderWordCardHeard(appContentInner, createWordCardHeard(true));
-// setWordCardId("1");
-// renderWordInput(appContentInner, createWordInput("워드", "인풋"));
-// renderWord(appContentInner, createWord("그냥", "워드"));
-
-wordForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  getInputValue();
+appContentInner.addEventListener("submit", (event) => {
+  const form = event.target.closeat(".content__container__form__text-box");
 });
+// 이벤트 위임으로 부모 요소에서 자식 요소들의 이벤트를 한번에 관리하기
 
 function getInputValue() {
   const sentence = sentenceInput.value.trim();
