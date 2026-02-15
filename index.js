@@ -88,7 +88,7 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
     </div>
     <div class="content__card__mean-text" id="mean">
       <span class="content__card__mean">${mean}</span>
-      <label for="mean  " class="label__mean">뜻</label>
+      <label for="mean" class="label__mean">뜻</label>
     </div>
   </div>
   `;
@@ -113,7 +113,12 @@ const cardDate = {
 appContentInner.innerHTML = wordCard(cardDate);
 
 appContentInner.addEventListener("submit", (event) => {
-  const form = event.target.closeat(".content__container__form__text-box");
+  const form = event.target.closest(".content__container__form__text-box");
+  if (form) {
+    console.log(form);
+    event.preventDefault();
+    getInputValue();
+  }
 });
 // 이벤트 위임으로 부모 요소에서 자식 요소들의 이벤트를 한번에 관리하기
 
