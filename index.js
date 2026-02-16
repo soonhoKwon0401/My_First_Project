@@ -117,6 +117,8 @@ appContentInner.addEventListener("submit", (event) => {
   const form = event.target.closest(".content__container__form__text-box");
   if (!form) return;
 
+  const sentenceInput = form.querySelector(".content__text-box__sentence");
+
   const sentence = form
     .querySelector(".content__text-box__sentence")
     .value.trim();
@@ -126,23 +128,20 @@ appContentInner.addEventListener("submit", (event) => {
     alert("문장 또는 뜻을 입력해주세요");
     return;
   }
-
+  setWords(sentence, mean);
   alert("저장되었습니다.");
-  wordForm.reset();
   sentenceInput.focus();
+  form.reset();
 });
 
-const getInputValue = (sentence, mean) => {};
-setWords(sentence, mean);
-
-function setWords(sentence, mean) {
+const setWords = (sentence, mean) => {
   const id = Date.now();
   const data = {
     sentence,
     mean,
   };
   localStorage.setItem(id, JSON.stringify(data));
-}
+};
 
 goToAddPage.addEventListener("click", (event) => {
   const linkEl = event.target.closest("[data-link]");
