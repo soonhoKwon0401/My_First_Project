@@ -113,27 +113,27 @@ const cardDate = {
 appContentInner.innerHTML = wordCard(cardDate);
 
 appContentInner.addEventListener("submit", (event) => {
+  event.preventDefault();
   const form = event.target.closest(".content__container__form__text-box");
-  if (form) {
-    console.log(form);
-    event.preventDefault();
-    getInputValue();
-  }
-});
-// 이벤트 위임으로 부모 요소에서 자식 요소들의 이벤트를 한번에 관리하기
+  if (!form) return;
 
-function getInputValue() {
-  const sentence = sentenceInput.value.trim();
-  const mean = meanInput.value.trim();
+  const sentence = form
+    .querySelector(".content__text-box__sentence")
+    .value.trim();
+  const mean = form.querySelector(".content__text-box__mean").value.trim();
+
   if (!sentence || !mean) {
     alert("문장 또는 뜻을 입력해주세요");
     return;
   }
-  setWords(sentence, mean);
+
   alert("저장되었습니다.");
   wordForm.reset();
   sentenceInput.focus();
-}
+});
+
+const getInputValue = (sentence, mean) => {};
+setWords(sentence, mean);
 
 function setWords(sentence, mean) {
   const id = Date.now();
