@@ -56,6 +56,7 @@ body {
   min-height: 120px;
   margin-inline: auto;
   background-color: gray;
+  padding: 10px;
 }
 
 .app__content__card__inner {
