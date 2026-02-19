@@ -159,14 +159,27 @@ goToAddPage.addEventListener("click", (event) => {
   render();
 });
 
+const getWords = () => {
+  return Object.keys(localStorage).map((key) => ({
+    id: key,
+    ...JSON.parse(localStorage.getItem(key)),
+  }));
+};
+
+const wordCards = () => {
+  return getWords().map((item) =>
+    wordCard({ ...cardDate, ...item, mode: "show" }),
+  );
+};
+
 const routes = {
   "/": () => createWordCardAdd(),
   "/add": () => wordCard(cardDate),
   "/library": () => wordCards(),
-  // "/library": () => wordCard({ ...cardDate, mode: "show" }),
 };
 
-/// map 을 이용해서 localStorage 에 등록된 아이템들을 만들기
+/// map 을 이용해서 localStorage 에 등록된 아이템들을 만들기 - 완
+/// 기존 app__content_card를 하나가 아닌 각각으로 분리하기
 
 function getCurrentPath() {
   return window.location.pathname;
@@ -178,29 +191,10 @@ function notfoundView() {
 
 function render() {
   const path = getCurrentPath();
-  console.log(routes[path], "test");
+  console.log(routes[path]);
   const view = routes[path] ?? notfoundView;
   appContent.innerHTML = view();
 }
 
 window.addEventListener("popstate", render);
 render();
-
-const getWords = () => {
-  return Object.keys(localStorage).map((key) => ({
-    id: key,
-    ...JSON.parse(localStorage.getItem(key)),
-  }));
-};
-
-const wordCards = () => {
-  getWords().map((item) => wordCard({ ...cardDate, ...item, mode: "show" }));
-};
-wordCards();
-
-// const getWords = () => {
-//     return Object.keys(localStorage).map((key) => ({
-//       id: key,
-//       ...JSON.parse(localStorage.getItem(key)),
-//     }));
-//   };
