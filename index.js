@@ -1,7 +1,7 @@
 "use strict";
 
 const goToAddPage = document.querySelector(".app__main");
-const appContent = document.querySelector(".app__content-card");
+const appContent = document.querySelector(".app__content");
 const appContentInner = document.querySelector(".app__content__card__inner");
 
 const createWordCardSideMenu = `
@@ -35,12 +35,12 @@ const createWordCardSideMenu = `
 `;
 
 const createWordCardAdd = () => `
-  <div class="add__content__container">
-    <h2 class="add__content-title">단어를 추가해보세요</h2>
-    <button type="button" class="add__content__button" data-link="/add">
-      추가하기
-    </button>
-  </div>
+    <div class="add__content__container">
+      <h2 class="add__content-title">단어를 추가해보세요</h2>
+      <button type="button" class="add__content__button" data-link="/add">
+        추가하기
+      </button>
+    </div>
   `;
 
 const createWordCardHeard = ({ id, showMenu = false }) =>
@@ -103,18 +103,20 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
   `;
 
 const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
-  ${createWordCardHeard({ id, showMenu })}
-  ${
-    mode === "edit"
-      ? createWordInput({ sentence, mean })
-      : createWord({ sentence, mean })
-  }
+  <div class="app__content-card">
+    ${createWordCardHeard({ id, showMenu })}
+    ${
+      mode === "edit"
+        ? createWordInput({ sentence, mean })
+        : createWord({ sentence, mean })
+    }
+  </div>
   `;
 
 const cardDate = {
   id: "number",
-  sentence: "왼쪽 문구",
-  mean: "오른쪽 문구",
+  sentence: "문장",
+  mean: "뜻",
   mode: "edit",
   showMenu: true,
 };
