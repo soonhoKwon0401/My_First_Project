@@ -45,6 +45,14 @@ body {
   flex: 1;
   background-color: brown;
   padding: 24px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.app__content__cards__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .app__content-card {
@@ -64,11 +72,14 @@ body {
 }
 
 .add__content__container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  background-color: gray;
+  height: 120px;
+  max-width: 800px;
+  margin-inline: auto;
 }
 
 .add__content__header {

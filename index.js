@@ -15,13 +15,13 @@ const createWordCardSideMenu = `
                       />
                     </svg>
                   </button>
-                  <button class="content__input-box_delete-button">
+                  <button class="content__input-box_delete-button" data-action="deleted">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       width="20"
-                      height="20"
+                      height="20"                      
                     >
                       <path
                         stroke-linecap="round"
@@ -143,6 +143,16 @@ appContent.addEventListener("submit", (event) => {
   form.reset();
 });
 
+appContent.addEventListener("click", (event) => {
+  const deleteEl = event.target.closest("[data-action]");
+  if (!deleteEl) return;
+  event.preventDefault();
+  const result = confirm("정말 삭제하시겠습니까?");
+  if (!result) return;
+  deleteEl.remove();
+});
+// deleteEL 에서 해당 버튼이 아닌 해당 카드 자체를 찾아야함
+
 const setWords = (sentence, mean) => {
   const id = Date.now();
   const data = {
@@ -169,9 +179,10 @@ const getWords = () => {
 };
 
 const wordCards = () => {
-  return getWords().map((item) =>
-    wordCard({ ...cardDate, ...item, mode: "show" }),
-  );
+  const cardsHTML = getWords()
+    .map((item) => wordCard({ ...cardDate, ...item, mode: "show" }))
+    .join("");
+  return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
 
 const routes = {
