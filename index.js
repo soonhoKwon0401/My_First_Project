@@ -147,11 +147,15 @@ appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
   if (!deleteEl) return;
   event.preventDefault();
+
+  const cardEl = deleteEl.closest(".app__content-card");
+  console.log(cardEl);
   const result = confirm("정말 삭제하시겠습니까?");
   if (!result) return;
-  deleteEl.remove();
+  cardEl.remove();
 });
-// deleteEL 에서 해당 버튼이 아닌 해당 카드 자체를 찾아야함
+// localStorage 에서 삭제한 후 다시 rander 하는 방식과
+// 바로 리스트에서 삭제하는 방식 중 어느것이 더 나은지 고민 필요
 
 const setWords = (sentence, mean) => {
   const id = Date.now();
