@@ -121,6 +121,13 @@ const cardDate = {
   showMenu: true,
 };
 
+function render() {
+  const path = getCurrentPath();
+  console.log(routes[path]);
+  const view = routes[path] ?? notfoundView;
+  appContent.innerHTML = view();
+}
+
 appContent.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.target.closest(".content__container__form__text-box");
@@ -149,10 +156,11 @@ appContent.addEventListener("click", (event) => {
   event.preventDefault();
   const result = confirm("정말 삭제하시겠습니까?");
   if (!result) return;
-  const id = event.target.closest("[data-id]");
-  console.log(id);
+  const idEl = event.target.closest("[data-id]");
+  localStorage.removeItem(idEl.dataset.id);
+  render();
 });
-// localStorage 에서 삭제한 후 다시 rander 하는 방식
+// LocalStorage 가 0 일 경우 메시지 추가
 
 const setWords = (sentence, mean) => {
   const id = Date.now();
@@ -201,13 +209,6 @@ function getCurrentPath() {
 
 function notfoundView() {
   return `<h1>Not Found</h1>`;
-}
-
-function render() {
-  const path = getCurrentPath();
-  console.log(routes[path]);
-  const view = routes[path] ?? notfoundView;
-  appContent.innerHTML = view();
 }
 
 window.addEventListener("popstate", render);
