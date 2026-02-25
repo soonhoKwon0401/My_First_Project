@@ -6,32 +6,32 @@ const appContentInner = document.querySelector(".app__content__card__inner");
 
 const createWordCardSideMenu = `
 <div class="content__input-box__menu">
-                  <button class="content__input-box__more-button">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                        fill-rule="evenodd"
-                        d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                  <button class="content__input-box_delete-button" data-action="deleted">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      width="20"
-                      height="20"                      
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
-                  </button>
-                </div>
+  <button class="content__input-box__more-button" data-edit="edit">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path
+        fill-rule="evenodd"
+        d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </button>
+  <button class="content__input-box_delete-button" data-action="deleted">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      width="20"
+      height="20"                      
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+      />
+    </svg>
+  </button>
+</div>
 `;
 
 const createWordCardAdd = () => `
@@ -105,11 +105,7 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
 const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
   <div class="app__content-card">
     ${createWordCardHeard({ id, showMenu })}
-    ${
-      mode === "edit"
-        ? createWordInput({ sentence, mean })
-        : createWord({ sentence, mean })
-    }
+    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
   </div>
   `;
 
@@ -135,9 +131,7 @@ appContent.addEventListener("submit", (event) => {
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
 
-  const sentence = form
-    .querySelector(".content__text-box__sentence")
-    .value.trim();
+  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -160,7 +154,12 @@ appContent.addEventListener("click", (event) => {
   localStorage.removeItem(idEl.dataset.id);
   render();
 });
-// LocalStorage 가 0 일 경우 메시지 추가
+
+appContent.addEventListener("click", (event) => {
+  const editButtonEl = event.target.closest("[data-edit]");
+  if (!editButtonEl) return;
+  event.preventDefault();
+});
 
 const setWords = (sentence, mean) => {
   const id = Date.now();
