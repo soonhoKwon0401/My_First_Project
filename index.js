@@ -159,6 +159,7 @@ appContent.addEventListener("click", (event) => {
   const editButtonEl = event.target.closest("[data-edit]");
   if (!editButtonEl) return;
   event.preventDefault();
+  console.log(editButtonEl);
 });
 
 const setWords = (sentence, mean) => {
