@@ -130,7 +130,6 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-
   const sentence = form.querySelector(".content__text-box__sentence").value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
@@ -138,6 +137,7 @@ appContent.addEventListener("submit", (event) => {
     alert("문장 또는 뜻을 입력해주세요");
     return;
   }
+
   setWords(sentence, mean);
   alert("저장되었습니다.");
   sentenceInput.focus();
@@ -159,7 +159,11 @@ appContent.addEventListener("click", (event) => {
   const editButtonEl = event.target.closest("[data-edit]");
   if (!editButtonEl) return;
   event.preventDefault();
-  console.log(editButtonEl);
+  const id = event.target.closest("[data-id]").dataset.id;
+  if (!id) return;
+  const { sentence, mean } = 1;
+  // id 를 이용해서 localstorage 에 해당 값들 가지고오기
+  // 가져온 값들을 다시 input 안에 넣어주기
 });
 
 const setWords = (sentence, mean) => {
@@ -199,9 +203,6 @@ const routes = {
   "/add": () => wordCard(cardDate),
   "/library": () => wordCards(),
 };
-
-/// map 을 이용해서 localStorage 에 등록된 아이템들을 만들기 - 완
-/// 기존 app__content_card를 하나가 아닌 각각으로 분리하기
 
 function getCurrentPath() {
   return window.location.pathname;
