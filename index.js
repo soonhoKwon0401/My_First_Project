@@ -120,11 +120,11 @@ const cardDate = {
 function render() {
   const path = getCurrentPath();
   const view = routes[path] ?? notfoundView;
-  appContent.innerHTML = view();
+  createHtml(view());
 }
 
-function createHtml() {
-  appContent.innerHTML;
+function createHtml(html) {
+  appContent.innerHTML = html;
 }
 
 appContent.addEventListener("submit", (event) => {
@@ -164,8 +164,13 @@ appContent.addEventListener("click", (event) => {
   event.preventDefault();
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
-  const { sentence, mean } = JSON.parse(localStorage.getItem(id));
-  // 가져온 값들을 다시 input 안에 넣어주기
+  const data = JSON.parse(localStorage.getItem(id));
+  const viewHTML = wordCard({ ...cardDate, ...data, id });
+  console.log(viewHTML);
+  createHtml(viewHTML);
+  // 기존에 있던 값들도 불러오게끔 수정필요
+  // 만약 2번째 카드가 변경되는거면 해당 위치에서 수정 가능하도록 수정 필요
+  // 기존에 입력된 값이 Input에 있어야함
 });
 
 const setWords = (sentence, mean) => {
