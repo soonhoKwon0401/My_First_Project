@@ -119,9 +119,12 @@ const cardDate = {
 
 function render() {
   const path = getCurrentPath();
-  console.log(routes[path]);
   const view = routes[path] ?? notfoundView;
   appContent.innerHTML = view();
+}
+
+function createHtml() {
+  appContent.innerHTML;
 }
 
 appContent.addEventListener("submit", (event) => {
@@ -161,8 +164,7 @@ appContent.addEventListener("click", (event) => {
   event.preventDefault();
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
-  const { sentence, mean } = 1;
-  // id 를 이용해서 localstorage 에 해당 값들 가지고오기
+  const { sentence, mean } = JSON.parse(localStorage.getItem(id));
   // 가져온 값들을 다시 input 안에 넣어주기
 });
 
