@@ -165,14 +165,21 @@ appContent.addEventListener("click", (event) => {
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
-  const viewHTML = wordCard({ ...cardDate, ...data, id });
-  console.log(viewHTML);
+  const viewHTML = wordCard({ ...cardDate, id });
   createHtml(viewHTML);
+  setInputValue(event);
   // 기존에 있던 값들도 불러오게끔 수정필요
   // 만약 2번째 카드가 변경되는거면 해당 위치에서 수정 가능하도록 수정 필요
   // 기존에 입력된 값이 Input에 있어야함
 });
-
+const setInputValue = (event) => {
+  const card = event.target.closest(".app__content-card");
+  console.log(card);
+  const sentenceInputBox = card.querySelector(".content__text-box__sentence");
+  const meanInputBox = card.querySelector(".contetn__text-box__mean");
+  console.log(sentenceInputBox, meanInputBox);
+};
+// edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
 const setWords = (sentence, mean) => {
   const id = Date.now();
   const data = {
