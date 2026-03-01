@@ -33,7 +33,11 @@ const createWordCardSideMenu = `
   </button>
 </div>
 `;
-
+// 객체 리터널을 이용해서 각 상태에 따라 ui가 변경되도록 수정 필요
+const creatWordCardSideMenuDeleteButton = () =>
+  `
+  <button class="content__cancel-button">취소</button>
+  `;
 const createWordCardAdd = () => `
     <div class="add__content__container">
       <h2 class="add__content-title">단어를 추가해보세요</h2>
@@ -114,7 +118,7 @@ const cardDate = {
   sentence: "문장",
   mean: "뜻",
   mode: "edit",
-  showMenu: true,
+  showMenu: false,
 };
 
 function render() {
@@ -158,6 +162,16 @@ appContent.addEventListener("click", (event) => {
   render();
 });
 
+const setInputValue = (card, { sentence, mean }) => {
+  console.log(sentence, mean);
+  const sentenceInputBox = card.querySelector(".content__text-box__sentence");
+  const meanInputBox = card.querySelector(".content__text-box__mean");
+  console.log(sentenceInputBox);
+  sentenceInputBox.value = sentence;
+  meanInputBox.value = "mean";
+  sentenceInputBox.focus();
+};
+
 appContent.addEventListener("click", (event) => {
   const editButtonEl = event.target.closest("[data-edit]");
   if (!editButtonEl) return;
@@ -165,20 +179,16 @@ appContent.addEventListener("click", (event) => {
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
+  console.log(data, "hi");
   const viewHTML = wordCard({ ...cardDate, id });
   createHtml(viewHTML);
-  setInputValue(event);
+  const card = document.querySelector(".app__content-card");
+  setInputValue(card, data);
   // 기존에 있던 값들도 불러오게끔 수정필요
   // 만약 2번째 카드가 변경되는거면 해당 위치에서 수정 가능하도록 수정 필요
   // 기존에 입력된 값이 Input에 있어야함
 });
-const setInputValue = (event) => {
-  const card = event.target.closest(".app__content-card");
-  console.log(card);
-  const sentenceInputBox = card.querySelector(".content__text-box__sentence");
-  const meanInputBox = card.querySelector(".contetn__text-box__mean");
-  console.log(sentenceInputBox, meanInputBox);
-};
+
 // edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
 const setWords = (sentence, mean) => {
   const id = Date.now();
@@ -207,7 +217,7 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...cardDate, ...item, mode: "show" }))
+    .map((item) => wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
