@@ -33,9 +33,17 @@ const createWordCardSideMenu = `
   </button>
 </div>
 `;
+
+const cardConfig = {
+  sideMenu: createWordCardSideMenu,
+  deletedButton: creatWordCardSideMenuDeleteButton,
+};
 // 객체 리터널을 이용해서 각 상태에 따라 ui가 변경되도록 수정 필요
-const creatWordCardSideMenuDeleteButton = () =>
-  `
+// 조건문에 따라서 카드가 다르게 보여지는것이 아니라 상태에 따라서 카드가 다르게 보여지도록 수정 필요
+
+// 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
+// 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
+const creatWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
   `;
 const createWordCardAdd = () => `
