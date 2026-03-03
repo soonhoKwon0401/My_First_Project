@@ -34,16 +34,23 @@ const createWordCardSideMenu = `
 </div>
 `;
 
-const cardConfig = {
-  sideMenu: createWordCardSideMenu,
-  deletedButton: creatWordCardSideMenuDeleteButton,
-};
+// const cardConfig = {
+//   sideMenu: createWordCardSideMenu,
+//   deletedButton: createWordCardSideMenuDeleteButton,
+// };
 // 객체 리터널을 이용해서 각 상태에 따라 ui가 변경되도록 수정 필요
 // 조건문에 따라서 카드가 다르게 보여지는것이 아니라 상태에 따라서 카드가 다르게 보여지도록 수정 필요
 
 // 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
 // 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
-const creatWordCardSideMenuDeleteButton = `
+
+const editWordCard = () => {
+  ` <div class="content__container__header" data-id="${id}">
+      <span class="content__numbers" ">${id}</span>
+    </div>
+  `;
+};
+const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
   `;
 const createWordCardAdd = () => `
@@ -145,7 +152,9 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
+  const sentence = form
+    .querySelector(".content__text-box__sentence")
+    .value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -225,7 +234,9 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }))
+    .map((item) =>
+      wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }),
+    )
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
