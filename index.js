@@ -44,12 +44,24 @@ const createWordCardSideMenu = `
 // 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
 // 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
 
-const editWordCard = () => {
-  ` <div class="content__container__header" data-id="${id}">
-      <span class="content__numbers" ">${id}</span>
+const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
+  <div class="app__content-card">
+    ${createWordCardHeard({ id, showMenu })}
+    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
+    </div>
+    `;
+const cardDate = {
+  id: "number",
+  sentence: "문장",
+  mean: "뜻",
+};
+
+const editWordCard = () => `
+    <div class="app__content-card">
+      ${createWordCardHeard({ id, showMenu: true })}
+      ${createWordInput({ sentence, mean })}
     </div>
   `;
-};
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
   `;
@@ -121,21 +133,6 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
   </div>
   `;
 
-const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
-  <div class="app__content-card">
-    ${createWordCardHeard({ id, showMenu })}
-    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
-  </div>
-  `;
-
-const cardDate = {
-  id: "number",
-  sentence: "문장",
-  mean: "뜻",
-  mode: "edit",
-  showMenu: false,
-};
-
 function render() {
   const path = getCurrentPath();
   const view = routes[path] ?? notfoundView;
@@ -152,9 +149,7 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form
-    .querySelector(".content__text-box__sentence")
-    .value.trim();
+  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -234,16 +229,14 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) =>
-      wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }),
-    )
+    .map((item) => wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
 
 const routes = {
   "/": () => createWordCardAdd(),
-  "/add": () => wordCard(cardDate),
+  "/add": () => editWordCard(cardDate),
   "/library": () => wordCards(),
 };
 
