@@ -56,12 +56,21 @@ const cardDate = {
   mean: "뜻",
 };
 
-const editWordCard = () => `
-    <div class="app__content-card">
-      ${createWordCardHeard({ id, showMenu: true })}
-      ${createWordInput({ sentence, mean })}
-    </div>
-  `;
+const cardContainer = (element) => `
+  <div class="app__content-card">  
+    ${element}
+  </div>
+`;
+
+const setCardItem = ({ id, showMenu, sentence, mean }) => `
+  ${createWordCardHeard({ id, showMenu: true })}
+  ${createWordInput({ sentence, mean })}
+  cardContainer
+`;
+
+const editWordCard = () => {};
+// 고차함수를 이용해서 cardContainer와 SetCardItem을 합치기
+
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
   `;
