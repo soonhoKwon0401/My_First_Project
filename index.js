@@ -65,11 +65,12 @@ const cardContainer = (element) => `
 const setCardItem = ({ id, showMenu, sentence, mean }) => `
   ${createWordCardHeard({ id, showMenu: true })}
   ${createWordInput({ sentence, mean })}
-  cardContainer
 `;
 
-const editWordCard = () => {};
-// 고차함수를 이용해서 cardContainer와 SetCardItem을 합치기
+const editWordCard = (state) => {
+  return cardContainer(setCardItem(state));
+};
+// 팩토리 함수를 이용해서 state값 정리
 
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
@@ -145,6 +146,7 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
 function render() {
   const path = getCurrentPath();
   const view = routes[path] ?? notfoundView;
+  console.log(view());
   createHtml(view());
 }
 
