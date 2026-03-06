@@ -55,8 +55,7 @@ const cardDate = {
   sentence: "문장",
   mean: "뜻",
 };
-
-const cardContainer = (element) => `
+const cardConiner = (element) => `
   <div class="app__content-card">  
     ${element}
   </div>
@@ -68,7 +67,7 @@ const setCardItem = ({ id, showMenu, sentence, mean }) => `
 `;
 
 const editWordCard = (state) => {
-  return cardContainer(setCardItem(state));
+  return cardConiner(setCardItem(state));
 };
 // 팩토리 함수를 이용해서 state값 정리
 
