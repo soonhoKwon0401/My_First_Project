@@ -46,7 +46,7 @@ const createWordCardSideMenu = `
 
 const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
   <div class="app__content-card">
-    ${createWordCardHeard({ id, showMenu })}
+    ${createWordCardHeader({ id, showMenu })}
     ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
     </div>
     `;
@@ -61,13 +61,26 @@ const cardConiner = (element) => `
   </div>
 `;
 
+const createWordCardHeader = ({ id, showMenu = false }) =>
+  `
+    <div class="content__container__header" data-id="${id}">
+      <span class="content__numbers">${id}</span>
+      ${showMenu ? createWordCardSideMenu : ""}
+    </div>
+  `;
+
 const setCardItem = ({ id, showMenu, sentence, mean }) => `
-  ${createWordCardHeard({ id, showMenu: true })}
+  ${createWordCardHeader({ id, showMenu: true })}
   ${createWordInput({ sentence, mean })}
 `;
 
 const editWordCard = (state) => {
   return cardConiner(setCardItem(state));
+};
+
+const randerBymode = {
+  edit: setCardItem(state),
+  add: setCardItem(state),
 };
 // 팩토리 함수를 이용해서 state값 정리
 
@@ -80,14 +93,6 @@ const createWordCardAdd = () => `
       <button type="button" class="add__content__button" data-link="/add">
         추가하기
       </button>
-    </div>
-  `;
-
-const createWordCardHeard = ({ id, showMenu = false }) =>
-  `
-    <div class="content__container__header" data-id="${id}">
-      <span class="content__numbers" ">${id}</span>
-      ${showMenu ? createWordCardSideMenu : ""}
     </div>
   `;
 
