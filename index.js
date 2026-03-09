@@ -50,7 +50,7 @@ const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
     ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
     </div>
     `;
-const cardDate = {
+const cardData = {
   id: "number",
   sentence: "문장",
   mean: "뜻",
@@ -80,7 +80,6 @@ const editWordCard = (state) => {
 
 const randerBymode = {
   edit: setCardItem(state),
-  add: setCardItem(state),
 };
 // 팩토리 함수를 이용해서 state값 정리
 
@@ -207,7 +206,7 @@ appContent.addEventListener("click", (event) => {
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
   console.log(data, "hi");
-  const viewHTML = wordCard({ ...cardDate, id });
+  const viewHTML = wordCard({ ...cardData, id });
   createHtml(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
@@ -244,14 +243,14 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...cardDate, ...item, mode: "show", showMenu: true }))
+    .map((item) => wordCard({ ...cardData, ...item, mode: "show", showMenu: true }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
 
 const routes = {
   "/": () => createWordCardAdd(),
-  "/add": () => editWordCard(cardDate),
+  "/add": () => editWordCard(cardData),
   "/library": () => wordCards(),
 };
 
