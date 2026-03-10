@@ -44,13 +44,13 @@ const createWordCardSideMenu = `
 // 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
 // 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
 
-const wordCard = ({ id, showMenu, sentence, mean, mode }) => `
+const wordCard = ({ id, showMenu, sentence, mean, mode }) => `  
   <div class="app__content-card">
     ${createWordCardHeader({ id, showMenu })}
     ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
     </div>
     `;
-const cardData = {
+const initialState = {
   id: "number",
   sentence: "문장",
   mean: "뜻",
@@ -206,7 +206,7 @@ appContent.addEventListener("click", (event) => {
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
   console.log(data, "hi");
-  const viewHTML = wordCard({ ...cardData, id });
+  const viewHTML = wordCard({ ...initialState, id });
   createHtml(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
@@ -243,14 +243,14 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...cardData, ...item, mode: "show", showMenu: true }))
+    .map((item) => wordCard({ ...initialState, ...item, mode: "show", showMenu: true }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
 
 const routes = {
   "/": () => createWordCardAdd(),
-  "/add": () => editWordCard(cardData),
+  "/add": () => editWordCard(initialState),
   "/library": () => wordCards(),
 };
 
