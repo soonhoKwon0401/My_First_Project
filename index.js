@@ -54,12 +54,16 @@ const initialState = {
   id: "number",
   sentence: "문장",
   mean: "뜻",
+  actionMenu: true,
+  mode: "edit",
 };
 const cardConiner = (element) => `
   <div class="app__content-card">  
     ${element}
   </div>
 `;
+
+d;
 
 const createWordCardHeader = ({ id, showMenu = false }) =>
   `
@@ -74,13 +78,13 @@ const setCardItem = ({ id, showMenu, sentence, mean }) => `
   ${createWordInput({ sentence, mean })}
 `;
 
-const editWordCard = (state) => {
-  return cardConiner(setCardItem(state));
-};
+// const editWordCard = (state) => {
+//   return cardConiner(setCardItem(state));
+// };
 
-const randerBymode = {
-  edit: setCardItem(state),
-};
+// const randerBymode = {
+//   edit: setCardItem(state),
+// };
 // 팩토리 함수를 이용해서 state값 정리
 
 const createWordCardSideMenuDeleteButton = `
