@@ -46,10 +46,11 @@ const createWordCardSideMenu = `
 
 const wordCard = ({ id, showMenu, sentence, mean, mode }) => `  
   <div class="app__content-card">
-    ${createWordCardHeader({ id, showMenu })}
+    ${createWordCardHeader({ id, actionMenu: showMenu })}
     ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
     </div>
     `;
+
 const initialState = {
   id: "number",
   sentence: "문장",
@@ -63,33 +64,23 @@ const cardConiner = (element) => `
   </div>
 `;
 
-d;
-
-const createWordCardHeader = ({ id, showMenu = false }) =>
+const createWordCardHeader = ({ id, actionMenu }) =>
   `
     <div class="content__container__header" data-id="${id}">
       <span class="content__numbers">${id}</span>
-      ${showMenu ? createWordCardSideMenu : ""}
+      ${actionMenu ? createWordCardSideMenu : ""}
     </div>
   `;
 
-const setCardItem = ({ id, showMenu, sentence, mean }) => `
-  ${createWordCardHeader({ id, showMenu: true })}
+const setCardItem = ({ id, actionMenu, sentence, mean }) => `
+  ${createWordCardHeader({ id, actionMenu })}
   ${createWordInput({ sentence, mean })}
 `;
-
-// const editWordCard = (state) => {
-//   return cardConiner(setCardItem(state));
-// };
-
-// const randerBymode = {
-//   edit: setCardItem(state),
-// };
-// 팩토리 함수를 이용해서 state값 정리
 
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
   `;
+
 const createWordCardAdd = () => `
     <div class="add__content__container">
       <h2 class="add__content-title">단어를 추가해보세요</h2>
@@ -153,7 +144,6 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
 function render() {
   const path = getCurrentPath();
   const view = routes[path] ?? notfoundView;
-  console.log(view());
   createHtml(view());
 }
 
@@ -247,7 +237,7 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...initialState, ...item, mode: "show", showMenu: true }))
+    .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
