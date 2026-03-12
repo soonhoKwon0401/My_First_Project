@@ -44,11 +44,11 @@ const createWordCardSideMenu = `
 // 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
 // 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
 
-const wordCard = ({ id, showMenu, sentence, mean, mode }) => `  
+const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
   <div class="app__content-card">
-    ${createWordCardHeader({ id, actionMenu: showMenu })}
+    ${createWordCardHeader({ id, actionMenu })}
     ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
-    </div>
+    </div>   
     `;
 
 const initialState = {
@@ -58,6 +58,13 @@ const initialState = {
   actionMenu: true,
   mode: "edit",
 };
+
+const renderBody = {
+  edit: ({ sentence, mean }) => createWordInput,
+  view: ({ sentence, mean }) => createWord,
+};
+// 개선 필요
+
 const cardConiner = (element) => `
   <div class="app__content-card">  
     ${element}
@@ -71,11 +78,6 @@ const createWordCardHeader = ({ id, actionMenu }) =>
       ${actionMenu ? createWordCardSideMenu : ""}
     </div>
   `;
-
-const setCardItem = ({ id, actionMenu, sentence, mean }) => `
-  ${createWordCardHeader({ id, actionMenu })}
-  ${createWordInput({ sentence, mean })}
-`;
 
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
