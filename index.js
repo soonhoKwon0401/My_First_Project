@@ -65,7 +65,7 @@ const renderBody = {
 };
 // 개선 필요
 
-const cardConiner = (element) => `
+const cardContainer = (element) => `
   <div class="app__content-card">  
     ${element}
   </div>
@@ -159,7 +159,9 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
+  const sentence = form
+    .querySelector(".content__text-box__sentence")
+    .value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -239,7 +241,9 @@ const getWords = () => {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu }))
+    .map((item) =>
+      wordCard({ ...initialState, ...item, mode: "show", actionMenu }),
+    )
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
