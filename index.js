@@ -59,11 +59,20 @@ const initialState = {
   mode: "edit",
 };
 
-const renderBody = {
-  edit: ({ sentence, mean }) => createWordInput,
-  view: ({ sentence, mean }) => createWord,
+const wordCards = () => {
+  const cardsHTML = getWords()
+    .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }))
+    .join("");
+  return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
-// 개선 필요
+
+const renderBody = {
+  edit: (data) => wordCard(data),
+  view: (data) => wordCard(data),
+  add: () => createWordCardAdd(),
+};
+
+// Library 적용 필요
 
 const cardContainer = (element) => `
   <div class="app__content-card">  
@@ -159,9 +168,7 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form
-    .querySelector(".content__text-box__sentence")
-    .value.trim();
+  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -239,18 +246,9 @@ const getWords = () => {
   }));
 };
 
-const wordCards = () => {
-  const cardsHTML = getWords()
-    .map((item) =>
-      wordCard({ ...initialState, ...item, mode: "show", actionMenu }),
-    )
-    .join("");
-  return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
-};
-
 const routes = {
-  "/": () => createWordCardAdd(),
-  "/add": () => editWordCard(initialState),
+  "/": () => renderBody.add(),
+  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
   "/library": () => wordCards(),
 };
 
