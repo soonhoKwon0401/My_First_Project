@@ -204,7 +204,7 @@ const setInputValue = (card, { sentence, mean }) => {
   const meanInputBox = card.querySelector(".content__text-box__mean");
   console.log(sentenceInputBox);
   sentenceInputBox.value = sentence;
-  meanInputBox.value = "mean";
+  meanInputBox.value = mean;
   sentenceInputBox.focus();
 };
 
@@ -215,12 +215,11 @@ appContent.addEventListener("click", (event) => {
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
-  console.log(data, "hi");
   const viewHTML = wordCard({ ...initialState, id });
   createHtml(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
-  // 수정시 해당 카드의 값이 아닌 다른 카드의 값들이 불러옴 -bug
+  render();
 });
 
 // edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
