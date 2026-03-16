@@ -64,6 +64,8 @@ const wordCards = () => {
     .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }))
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
+  // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
+  // 맵에 조건을 걸떄 function을 만들어서 적용하면 기능이 분리되어 추후에 수정하기 용이함
 };
 
 const routes = {
@@ -199,10 +201,8 @@ appContent.addEventListener("click", (event) => {
 });
 
 const setInputValue = (card, { sentence, mean }) => {
-  console.log(sentence, mean);
   const sentenceInputBox = card.querySelector(".content__text-box__sentence");
-  const meanInputBox = card.querySelector(".content__text-box__mean");
-  console.log(sentenceInputBox);
+  const meanInputBox = card.querySelectorsss(".content__text-box__mean");
   sentenceInputBox.value = sentence;
   meanInputBox.value = mean;
   sentenceInputBox.focus();
@@ -219,8 +219,8 @@ appContent.addEventListener("click", (event) => {
   createHtml(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
-  render();
 });
+// wordCards를 이용해서 내가 선택한 카드는 edit모드 나머지는 view 형식으로 보여지게끔 구현 필요
 
 // edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
 const setWords = (sentence, mean) => {
