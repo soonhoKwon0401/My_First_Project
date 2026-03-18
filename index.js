@@ -81,8 +81,6 @@ const renderBody = {
   view: (data) => wordCard(data),
   add: () => createWordCardAdd(),
   lists: () => wordCards(),
-  // 테스트
-  // 코드 테스트
 };
 
 const cardContainer = (element) => `
@@ -227,7 +225,7 @@ appContent.addEventListener("click", (event) => {
   setInputValue(card, data);
 });
 // wordCards를 이용해서 내가 선택한 카드는 edit모드 나머지는 view 형식으로 보여지게끔 구현 필요
-// 맥북 테스트
+// 맥북 배포 테스트
 // edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
 const setWords = (sentence, mean) => {
   const id = Date.now();
