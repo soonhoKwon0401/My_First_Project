@@ -3,9 +3,22 @@
 const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content");
 const appContentInner = document.querySelector(".app__content__card__inner");
+const initialState = {
+  id: "number",
+  sentence: "문장",
+  mean: "뜻",
+  actionMenu: true,
+  mode: "edit",
+};
 
-const createWordCardSideMenu = `
-<div class="content__input-box__menu">
+const routes = {
+  "/": () => renderBody.add(),
+  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
+  "/library": () => renderBody.lists(),
+};
+
+const createWordCardSideMenu = () =>
+  `<div class="content__input-box__menu">
   <button class="content__input-box__more-button" data-edit="edit">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path
@@ -51,14 +64,6 @@ const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `
     </div>   
     `;
 
-const initialState = {
-  id: "number",
-  sentence: "문장",
-  mean: "뜻",
-  actionMenu: true,
-  mode: "edit",
-};
-
 const wordCards = () => {
   const cardsHTML = getWords()
     .map((item) =>
@@ -68,12 +73,6 @@ const wordCards = () => {
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
   // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
   // 맵에 조건을 걸떄 function을 만들어서 적용하면 기능이 분리되어 추후에 수정하기 용이함
-};
-
-const routes = {
-  "/": () => renderBody.add(),
-  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
-  "/library": () => renderBody.lists(),
 };
 
 const renderBody = {
@@ -206,7 +205,7 @@ appContent.addEventListener("click", (event) => {
 
 const setInputValue = (card, { sentence, mean }) => {
   const sentenceInputBox = card.querySelector(".content__text-box__sentence");
-  const meanInputBox = card.querySelectorsss(".content__text-box__mean");
+  const meanInputBox = card.querySelectors(".content__text-box__mean");
   sentenceInputBox.value = sentence;
   meanInputBox.value = mean;
   sentenceInputBox.focus();
