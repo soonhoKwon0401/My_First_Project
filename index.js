@@ -61,7 +61,9 @@ const initialState = {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }))
+    .map((item) =>
+      wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }),
+    )
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
   // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
@@ -175,7 +177,9 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
+  const sentence = form
+    .querySelector(".content__text-box__sentence")
+    .value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
@@ -221,7 +225,7 @@ appContent.addEventListener("click", (event) => {
   setInputValue(card, data);
 });
 // wordCards를 이용해서 내가 선택한 카드는 edit모드 나머지는 view 형식으로 보여지게끔 구현 필요
-
+// 맥북 테스트
 // edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
 const setWords = (sentence, mean) => {
   const id = Date.now();
