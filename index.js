@@ -61,7 +61,9 @@ const initialState = {
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) => wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }))
+    .map((item) =>
+      wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }),
+    )
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
   // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
@@ -79,6 +81,7 @@ const renderBody = {
   view: (data) => wordCard(data),
   add: () => createWordCardAdd(),
   lists: () => wordCards(),
+  // 테스트
 };
 
 const cardContainer = (element) => `
@@ -175,7 +178,9 @@ appContent.addEventListener("submit", (event) => {
   if (!form) return;
 
   const sentenceInput = form.querySelector(".content__text-box__sentence");
-  const sentence = form.querySelector(".content__text-box__sentence").value.trim();
+  const sentence = form
+    .querySelector(".content__text-box__sentence")
+    .value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
 
   if (!sentence || !mean) {
