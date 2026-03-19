@@ -17,6 +17,12 @@ const routes = {
   "/library": () => renderBody.lists(),
 };
 
+const cardContainer = (element) => `
+  <div class="app__content-card">  
+    ${element}
+  </div>
+`;
+
 const createWordCardSideMenu = () =>
   `<div class="content__input-box__menu">
   <button class="content__input-box__more-button" data-edit="edit">
@@ -47,15 +53,13 @@ const createWordCardSideMenu = () =>
 </div>
 `;
 
-// const cardConfig = {
-//   sideMenu: createWordCardSideMenu,
-//   deletedButton: createWordCardSideMenuDeleteButton,
-// };
-// 객체 리터널을 이용해서 각 상태에 따라 ui가 변경되도록 수정 필요
-// 조건문에 따라서 카드가 다르게 보여지는것이 아니라 상태에 따라서 카드가 다르게 보여지도록 수정 필요
-
-// 1. 상태 edit일때 어떻게 보여져야하는지 ui 결정
-// 2. 해당 상태일때 사용할 html 을 한개의 변수값에 추가
+const createWordCardHeader = ({ id, actionMenu }) =>
+  `
+    <div class="content__container__header" data-id="${id}">
+      <span class="content__numbers">${id}</span>
+      ${actionMenu ? createWordCardSideMenu : ""}
+    </div>
+  `;
 
 const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
   <div class="app__content-card">
@@ -74,27 +78,6 @@ const wordCards = () => {
   // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
   // 맵에 조건을 걸떄 function을 만들어서 적용하면 기능이 분리되어 추후에 수정하기 용이함
 };
-
-const renderBody = {
-  edit: (data) => wordCard(data),
-  view: (data) => wordCard(data),
-  add: () => createWordCardAdd(),
-  lists: () => wordCards(),
-};
-
-const cardContainer = (element) => `
-  <div class="app__content-card">  
-    ${element}
-  </div>
-`;
-
-const createWordCardHeader = ({ id, actionMenu }) =>
-  `
-    <div class="content__container__header" data-id="${id}">
-      <span class="content__numbers">${id}</span>
-      ${actionMenu ? createWordCardSideMenu : ""}
-    </div>
-  `;
 
 const createWordCardSideMenuDeleteButton = `
   <button class="content__cancel-button">취소</button>
