@@ -143,14 +143,14 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
   </div>
   `;
 
+function createHtml(html) {
+  appContent.innerHTML = html;
+}
+
 function render() {
   const path = getCurrentPath();
   const view = routes[path] ?? notfoundView;
   createHtml(view());
-}
-
-function createHtml(html) {
-  appContent.innerHTML = html;
 }
 
 appContent.addEventListener("submit", (event) => {
