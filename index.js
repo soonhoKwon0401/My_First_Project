@@ -11,12 +11,6 @@ const initialState = {
   mode: "edit",
 };
 
-const routes = {
-  "/": () => renderBody.add(),
-  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
-  "/library": () => renderBody.lists(),
-};
-
 const cardContainer = (element) => `
   <div class="app__content-card">  
     ${element}
@@ -142,6 +136,12 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
     </div>
   </div>
   `;
+
+const routes = {
+  "/": () => renderBody.add(),
+  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
+  "/library": () => renderBody.lists(),
+};
 
 function createHtml(html) {
   appContent.innerHTML = html;
