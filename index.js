@@ -11,6 +11,13 @@ const initialState = {
   mode: "edit",
 };
 
+const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
+  <div class="app__content-card">
+    ${createWordCardHeader({ id, actionMenu })}
+    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
+    </div>   
+    `;
+
 const cardContainer = (element) => `
   <div class="app__content-card">  
     ${element}
@@ -51,16 +58,9 @@ const createWordCardHeader = ({ id, actionMenu }) =>
   `
     <div class="content__container__header" data-id="${id}">
       <span class="content__numbers">${id}</span>
-      ${actionMenu ? createWordCardSideMenu : ""}
+      ${actionMenu ? createWordCardSideMenu() : ""}
     </div>
   `;
-
-const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
-  <div class="app__content-card">
-    ${createWordCardHeader({ id, actionMenu })}
-    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
-    </div>   
-    `;
 
 const wordCards = () => {
   const cardsHTML = getWords()
@@ -136,6 +136,11 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
     </div>
   </div>
   `;
+
+const renderBody = {
+  add: createWordCardAdd,
+  edit: wordCard,
+};
 
 const routes = {
   "/": () => renderBody.add(),
