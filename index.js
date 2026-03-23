@@ -64,13 +64,14 @@ const createWordCardHeader = ({ id, actionMenu }) =>
 
 const wordCards = () => {
   const cardsHTML = getWords()
-    .map((item) =>
-      wordCard({ ...initialState, ...item, mode: "show", actionMenu: true }),
-    )
+    .map((item) => {
+      console.log(item);
+      //1. item에서 edit할 id 을 찾는다.
+      //2. 해당 값만 edit으로 변경하고 나머지는 list 로 보여준다.
+      wordCard({ ...initialState, ...item, mode: "show", actionMenu: true });
+    })
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
-  // 맵에서 조건을 걸어서 내가 선택한 값만 edit mode로 변경되게끔 수정 필요
-  // 맵에 조건을 걸떄 function을 만들어서 적용하면 기능이 분리되어 추후에 수정하기 용이함
 };
 
 const createWordCardSideMenuDeleteButton = `
@@ -140,6 +141,7 @@ const createWord = ({ sentence = "문장", mean = "뜻" }) =>
 const renderBody = {
   add: createWordCardAdd,
   edit: wordCard,
+  lists: wordCards,
 };
 
 const routes = {
@@ -191,14 +193,6 @@ appContent.addEventListener("click", (event) => {
   render();
 });
 
-const setInputValue = (card, { sentence, mean }) => {
-  const sentenceInputBox = card.querySelector(".content__text-box__sentence");
-  const meanInputBox = card.querySelectors(".content__text-box__mean");
-  sentenceInputBox.value = sentence;
-  meanInputBox.value = mean;
-  sentenceInputBox.focus();
-};
-
 appContent.addEventListener("click", (event) => {
   const editButtonEl = event.target.closest("[data-edit]");
   if (!editButtonEl) return;
@@ -206,14 +200,22 @@ appContent.addEventListener("click", (event) => {
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
-  const viewHTML = wordCard({ ...initialState, id });
+  // const viewHTML = wordCard({ ...initialState, id });
+  const viewHTML = wordCards();
   createHtml(viewHTML);
+  console.log(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
 });
-// wordCards를 이용해서 내가 선택한 카드는 edit모드 나머지는 view 형식으로 보여지게끔 구현 필요
-// 맥북 배포 테스트
-// edit으로 변경될때 Form 태그가 안불러옴... 확인 필요함
+
+const setInputValue = (card, { sentence, mean }) => {
+  const sentenceInputBox = card.querySelector(".content__text-box__sentence");
+  const meanInputBox = card.querySelector(".content__text-box__mean");
+  sentenceInputBox.value = sentence;
+  meanInputBox.value = mean;
+  sentenceInputBox.focus();
+};
+
 const setWords = (sentence, mean) => {
   const id = Date.now();
   const data = {
