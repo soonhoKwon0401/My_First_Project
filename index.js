@@ -66,6 +66,9 @@ const wordCards = () => {
   const cardsHTML = getWords()
     .map((item) => {
       console.log(item);
+      if (item === )
+      // 이게 edit에서 누른것인지 아니면 그냥 list인지 구분할 필요가있음
+      // 어떻게 구분해야하지?
       //1. item에서 edit할 id 을 찾는다.
       //2. 해당 값만 edit으로 변경하고 나머지는 list 로 보여준다.
       wordCard({ ...initialState, ...item, mode: "show", actionMenu: true });
