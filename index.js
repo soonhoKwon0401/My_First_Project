@@ -62,16 +62,24 @@ const createWordCardHeader = ({ id, actionMenu }) =>
     </div>
   `;
 
-const wordCards = () => {
+const wordCards = (id) => {
   const cardsHTML = getWords()
     .map((item) => {
+      console.log(id);
       console.log(item);
-      if (item === )
+      if (id === item.id) {
+        console.log(item.sentence);
+      }
       // 이게 edit에서 누른것인지 아니면 그냥 list인지 구분할 필요가있음
       // 어떻게 구분해야하지?
       //1. item에서 edit할 id 을 찾는다.
       //2. 해당 값만 edit으로 변경하고 나머지는 list 로 보여준다.
-      wordCard({ ...initialState, ...item, mode: "show", actionMenu: true });
+      return wordCard({
+        ...initialState,
+        ...item,
+        mode: "show",
+        actionMenu: true,
+      });
     })
     .join("");
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
@@ -204,7 +212,7 @@ appContent.addEventListener("click", (event) => {
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
   // const viewHTML = wordCard({ ...initialState, id });
-  const viewHTML = wordCards();
+  const viewHTML = wordCards(id);
   createHtml(viewHTML);
   console.log(viewHTML);
   const card = document.querySelector(".app__content-card");
