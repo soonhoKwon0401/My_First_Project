@@ -65,15 +65,14 @@ const createWordCardHeader = ({ id, actionMenu }) =>
 const wordCards = (id) => {
   const cardsHTML = getWords()
     .map((item) => {
-      console.log(id);
-      console.log(item);
       if (id === item.id) {
-        console.log(item.sentence);
+        return wordCard({
+          ...initialState,
+          ...item,
+          mode: "edit",
+          actionMenu: false,
+        });
       }
-      // 이게 edit에서 누른것인지 아니면 그냥 list인지 구분할 필요가있음
-      // 어떻게 구분해야하지?
-      //1. item에서 edit할 id 을 찾는다.
-      //2. 해당 값만 edit으로 변경하고 나머지는 list 로 보여준다.
       return wordCard({
         ...initialState,
         ...item,
@@ -211,10 +210,8 @@ appContent.addEventListener("click", (event) => {
   const id = event.target.closest("[data-id]").dataset.id;
   if (!id) return;
   const data = JSON.parse(localStorage.getItem(id));
-  // const viewHTML = wordCard({ ...initialState, id });
   const viewHTML = wordCards(id);
   createHtml(viewHTML);
-  console.log(viewHTML);
   const card = document.querySelector(".app__content-card");
   setInputValue(card, data);
 });
@@ -225,6 +222,7 @@ const setInputValue = (card, { sentence, mean }) => {
   sentenceInputBox.value = sentence;
   meanInputBox.value = mean;
   sentenceInputBox.focus();
+  // 첫번째를 제외한 다른 리스트에서는 value 값을 못가지고옴
 };
 
 const setWords = (sentence, mean) => {
