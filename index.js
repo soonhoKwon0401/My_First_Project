@@ -14,7 +14,7 @@ const initialState = {
 const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
   <div class="app__content-card">
     ${createWordCardHeader({ id, actionMenu })}
-    ${mode === "edit" ? createWordInput({ sentence, mean }) : createWord({ sentence, mean })}
+    ${mode === "edit" ? createWordInput() : createWord({ sentence, mean })}
     </div>   
     `;
 
@@ -101,7 +101,7 @@ const setWordCardId = (id) => {
   document.querySelector(".content__numbers").textContent = id;
 };
 
-const createWordInput = ({ sentence = "문장", mean = "뜻" }) =>
+const createWordInput = () =>
   `
     <form class="content__container__form__text-box" id="text-box">
       <div class="content__container__text-box">
@@ -111,7 +111,7 @@ const createWordInput = ({ sentence = "문장", mean = "뜻" }) =>
             id="sentence"
             class="content__text-box__sentence"
           />
-          <label for="sentence" class="label__sentence">${sentence}</label>
+          <label for="sentence" class="label__sentence">문장</label>
         </div>
         <div class="content__mean__inner">
           <input
@@ -119,7 +119,7 @@ const createWordInput = ({ sentence = "문장", mean = "뜻" }) =>
             id="mean"
             class="content__text-box__mean"
           />
-          <label for="mean" class="label__mean">${mean}</label>
+          <label for="mean" class="label__mean">뜻</label>
         </div>
           <button
             class="content_text-box__submit"
@@ -212,11 +212,13 @@ appContent.addEventListener("click", (event) => {
   const data = JSON.parse(localStorage.getItem(id));
   const viewHTML = wordCards(id);
   createHtml(viewHTML);
-  const card = document.querySelector(".app__content-card");
+  console.log(id);
+  const card = document.querySelector(`[data-id="${id}"]`);
   setInputValue(card, data);
 });
 
 const setInputValue = (card, { sentence, mean }) => {
+  console.log(card);
   const sentenceInputBox = card.querySelector(".content__text-box__sentence");
   const meanInputBox = card.querySelector(".content__text-box__mean");
   sentenceInputBox.value = sentence;
