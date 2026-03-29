@@ -4,10 +4,10 @@ const goToAddPage = document.querySelector(".app__main");
 const appContent = document.querySelector(".app__content");
 const appContentInner = document.querySelector(".app__content__card__inner");
 const initialState = {
-  id: "number",
+  id: "외우고자하는 문장과 뜻을 작성하세요",
   sentence: "문장",
   mean: "뜻",
-  actionMenu: true,
+  actionMenu: false,
   mode: "edit",
 };
 
@@ -211,7 +211,6 @@ appContent.addEventListener("click", (event) => {
   const data = JSON.parse(localStorage.getItem(id));
   const viewHTML = wordCards(id);
   createHtml(viewHTML);
-  console.log(id);
   const card = document.querySelector(`[data-id="${id}"]`);
   const cardParentElement = card.closest(".app__content-card");
   setInputValue(cardParentElement, data);
