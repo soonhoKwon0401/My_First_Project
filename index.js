@@ -174,7 +174,6 @@ appContent.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.target.closest(".content__container__form__text-box");
   if (!form) return;
-
   const sentenceInput = form.querySelector(".content__text-box__sentence");
   const sentence = form
     .querySelector(".content__text-box__sentence")
@@ -214,17 +213,16 @@ appContent.addEventListener("click", (event) => {
   createHtml(viewHTML);
   console.log(id);
   const card = document.querySelector(`[data-id="${id}"]`);
-  setInputValue(card, data);
+  const cardParentElement = card.closest(".app__content-card");
+  setInputValue(cardParentElement, data);
 });
 
 const setInputValue = (card, { sentence, mean }) => {
-  console.log(card);
   const sentenceInputBox = card.querySelector(".content__text-box__sentence");
   const meanInputBox = card.querySelector(".content__text-box__mean");
   sentenceInputBox.value = sentence;
   meanInputBox.value = mean;
   sentenceInputBox.focus();
-  // 첫번째를 제외한 다른 리스트에서는 value 값을 못가지고옴
 };
 
 const setWords = (sentence, mean) => {
