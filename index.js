@@ -174,6 +174,13 @@ appContent.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.target.closest(".content__container__form__text-box");
   if (!form) return;
+  const id = event.target
+    .closest(".app__content-card")
+    .querySelector("[data-id]").dataset.id;
+  // 31.Mar
+  // id 값으로 array 에 해당 값이 있는 체크하여 edit mode 인지 add mode 인지 구분
+  // localstoray 에서 id 값으로 조회하여 상태값 체크
+  // 이 기능은 따로 함수로 만들기
   const sentenceInput = form.querySelector(".content__text-box__sentence");
   const sentence = form
     .querySelector(".content__text-box__sentence")
