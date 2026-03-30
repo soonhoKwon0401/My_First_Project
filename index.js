@@ -190,6 +190,8 @@ appContent.addEventListener("submit", (event) => {
   sentenceInput.focus();
   form.reset();
 });
+// Mon 30.March
+// edit 일때 저장하면 기존 값을 업데이트하기
 
 appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
