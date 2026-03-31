@@ -177,10 +177,6 @@ appContent.addEventListener("submit", (event) => {
   const id = event.target
     .closest(".app__content-card")
     .querySelector("[data-id]").dataset.id;
-  // 31.Mar
-  // id 값으로 array 에 해당 값이 있는 체크하여 edit mode 인지 add mode 인지 구분
-  // localstoray 에서 id 값으로 조회하여 상태값 체크
-  // 이 기능은 따로 함수로 만들기
   const sentenceInput = form.querySelector(".content__text-box__sentence");
   const sentence = form
     .querySelector(".content__text-box__sentence")
@@ -191,15 +187,22 @@ appContent.addEventListener("submit", (event) => {
     alert("문장 또는 뜻을 입력해주세요");
     return;
   }
-
+  upsertWord(id);
   setWords(sentence, mean);
   alert("저장되었습니다.");
   sentenceInput.focus();
   form.reset();
 });
-// Mon 30.March
-// edit 일때 저장하면 기존 값을 업데이트하기
 
+const upsertWord = (id) => {
+  const value = JSON.parse(localStorage.getItem(id));
+
+  null === value ? console.log("true") : console.log("false");
+};
+// apr.1
+// id 값 존재여부에 따라서 어떤 함수를 동작할지 정의
+// 값 존재하면 localstoray 에 값 업데이트
+// 값 없으면 localstoray 에 값 추가
 appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
   if (!deleteEl) return;
