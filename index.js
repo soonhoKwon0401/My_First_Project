@@ -196,8 +196,7 @@ appContent.addEventListener("submit", (event) => {
 
 const upsertWord = (id) => {
   const value = JSON.parse(localStorage.getItem(id));
-
-  null === value ? console.log("true") : console.log("false");
+  null === value ? setWords(sentence, mean) : console.log("false");
 };
 // apr.1
 // id 값 존재여부에 따라서 어떤 함수를 동작할지 정의
