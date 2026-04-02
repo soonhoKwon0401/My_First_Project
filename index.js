@@ -202,6 +202,7 @@ const upsertWord = (id) => {
 // id 값 존재여부에 따라서 어떤 함수를 동작할지 정의
 // 값 존재하면 localstoray 에 값 업데이트
 // 값 없으면 localstoray 에 값 추가
+// 예외 처리 필요
 appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
   if (!deleteEl) return;
