@@ -9,6 +9,7 @@ const initialState = {
   mean: "뜻",
   actionMenu: false,
   mode: "edit",
+  type: "functions"
 };
 
 const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
