@@ -11,7 +11,8 @@ const initialState = {
   mode: "edit",
   type: "functions",
   test: "기능 테스트",
-  function: "test"
+  function: "test",
+  test: "test item"
 };
 
 const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
