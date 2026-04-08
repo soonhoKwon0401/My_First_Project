@@ -188,7 +188,6 @@ appContent.addEventListener("submit", (event) => {
     return;
   }
   upsertWord(id);
-  setWords(sentence, mean);
   alert("저장되었습니다.");
   sentenceInput.focus();
   form.reset();
@@ -196,7 +195,7 @@ appContent.addEventListener("submit", (event) => {
 
 const upsertWord = (id) => {
   const value = JSON.parse(localStorage.getItem(id));
-  null === value ? setWords(sentence, mean) : console.log("false");
+  null === value ? console.log("false") : setWords(value);
 };
 // apr.1
 // id 값 존재여부에 따라서 어떤 함수를 동작할지 정의
@@ -237,7 +236,7 @@ const setInputValue = (card, { sentence, mean }) => {
   sentenceInputBox.focus();
 };
 
-const setWords = (sentence, mean) => {
+const setWords = ({ sentence, mean }) => {
   const id = Date.now();
   const data = {
     sentence,
@@ -257,7 +256,7 @@ goToAddPage.addEventListener("click", (event) => {
 
 const getWords = () => {
   return Object.keys(localStorage).map((key) => ({
-    id: key,ß
+    id: key,
     ...JSON.parse(localStorage.getItem(key)),
   }));
 };
@@ -272,5 +271,3 @@ function notfoundView() {
 
 window.addEventListener("popstate", render);
 render();
-
-tiyoon@grib.co.kr
