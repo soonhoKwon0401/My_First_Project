@@ -9,10 +9,6 @@ const initialState = {
   mean: "뜻",
   actionMenu: false,
   mode: "edit",
-  type: "functions",
-  test: "기능 테스트",
-  function: "test",
-  test: "test item"
 };
 
 const wordCard = ({ id, actionMenu, sentence, mean, mode }) => `  
@@ -276,3 +272,5 @@ function notfoundView() {
 
 window.addEventListener("popstate", render);
 render();
+
+tiyoon@grib.co.kr
