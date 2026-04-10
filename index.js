@@ -196,13 +196,9 @@ appContent.addEventListener("submit", (event) => {
 const upsertWord = (id) => {
   const value = JSON.parse(localStorage.getItem(id));
   null === value ? console.log("false") : setWords(value);
+  console.log(value);
 };
-// apr.1
-// id 값 존재여부에 따라서 어떤 함수를 동작할지 정의
-// 값 존재하면 localstoray 에 값 업데이트
-// 값 없으면 localstoray 에 값 추가
-// 예외 처리 필요
-// localstorage 수정
+// 수정과, 추가를 분리하기
 appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
   if (!deleteEl) return;
