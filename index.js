@@ -170,6 +170,7 @@ function render() {
   createHtml(view());
 }
 
+// 저장 버튼
 appContent.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.target.closest(".content__container__form__text-box");
@@ -188,6 +189,9 @@ appContent.addEventListener("submit", (event) => {
     return;
   }
   upsertWord(id);
+  console.log(id);
+  // ≈ id 값을 넘겨준 후 이 값을 이용해서 upsertWord 에서 localstorage를 검색해서 값을 찾아냄
+  // 이 함수에서 이 값을 바로 넘겨주는게 어떨까?
   alert("저장되었습니다.");
   sentenceInput.focus();
   form.reset();
@@ -195,10 +199,12 @@ appContent.addEventListener("submit", (event) => {
 
 const upsertWord = (id) => {
   const value = JSON.parse(localStorage.getItem(id));
-  null === value ? console.log("false") : setWords(value);
+  null !== value ? setWords(value) : console.log("false");
   console.log(value);
 };
 // 수정과, 추가를 분리하기
+
+// 삭제 버튼
 appContent.addEventListener("click", (event) => {
   const deleteEl = event.target.closest("[data-action]");
   if (!deleteEl) return;
@@ -210,6 +216,7 @@ appContent.addEventListener("click", (event) => {
   render();
 });
 
+// 수정 (더보기) 버튼
 appContent.addEventListener("click", (event) => {
   const editButtonEl = event.target.closest("[data-edit]");
   if (!editButtonEl) return;
