@@ -183,27 +183,33 @@ appContent.addEventListener("submit", (event) => {
     .querySelector(".content__text-box__sentence")
     .value.trim();
   const mean = form.querySelector(".content__text-box__mean").value.trim();
-
   if (!sentence || !mean) {
     alert("문장 또는 뜻을 입력해주세요");
     return;
   }
-  upsertWord(id);
-  console.log(id);
-  // ≈ id 값을 넘겨준 후 이 값을 이용해서 upsertWord 에서 localstorage를 검색해서 값을 찾아냄
-  // 이 함수에서 이 값을 바로 넘겨주는게 어떨까?
-  // 함수에서 값을 변경해서 넘겨주기
+  const data = {
+    id,
+    sentence,
+    mean,
+  };
+  upsertWord(data);
   alert("저장되었습니다.");
   sentenceInput.focus();
   form.reset();
 });
 
-const upsertWord = (id) => {
-  const value = JSON.parse(localStorage.getItem(id));
-  null !== value ? setWords(value) : console.log("false");
-  console.log(value);
+const upsertWord = (data) => {
+  // first: value 상수가 꼮 필요 한지 확인
+  // edit에서 변경한 이후에 인풋창이 아닌 값 리스트가 보이도록 수정 필요
+  const value = JSON.parse(localStorage.getItem(data.id));
+  null !== value ? editWord(data) : console.log("추가하기");
 };
-// 수정과, 추가를 분리하기
+
+const editWord = ({ id, ...data }) => {
+  console.log(data.id, data, "xptmxm");
+  localStorage.setItem(id, JSON.stringify(data));
+  console.log("여기에요");
+};
 
 // 삭제 버튼
 appContent.addEventListener("click", (event) => {
