@@ -192,6 +192,7 @@ appContent.addEventListener("submit", (event) => {
   console.log(id);
   // ≈ id 값을 넘겨준 후 이 값을 이용해서 upsertWord 에서 localstorage를 검색해서 값을 찾아냄
   // 이 함수에서 이 값을 바로 넘겨주는게 어떨까?
+  // 함수에서 값을 변경해서 넘겨주기
   alert("저장되었습니다.");
   sentenceInput.focus();
   form.reset();
