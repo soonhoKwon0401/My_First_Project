@@ -199,16 +199,13 @@ appContent.addEventListener("submit", (event) => {
 });
 
 const upsertWord = (data) => {
-  // first: value 상수가 꼮 필요 한지 확인
-  // edit에서 변경한 이후에 인풋창이 아닌 값 리스트가 보이도록 수정 필요
   const value = JSON.parse(localStorage.getItem(data.id));
-  null !== value ? editWord(data) : console.log("추가하기");
+  null !== value ? editWord(data) : setWords(data);
 };
 
 const editWord = ({ id, ...data }) => {
-  console.log(data.id, data, "xptmxm");
   localStorage.setItem(id, JSON.stringify(data));
-  console.log("여기에요");
+  // 수정 후 리스트를 다시 그려야함 // Apr.16
 };
 
 // 삭제 버튼
