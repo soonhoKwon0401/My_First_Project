@@ -205,7 +205,7 @@ const upsertWord = (data) => {
 
 const editWord = ({ id, ...data }) => {
   localStorage.setItem(id, JSON.stringify(data));
-  // 수정 후 리스트를 다시 그려야함 // Apr.16
+  // 수정된 값이 inputBox가 아닌 text가 보여져야함 // Apr.19
 };
 
 // 삭제 버튼
