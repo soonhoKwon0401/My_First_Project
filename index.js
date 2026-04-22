@@ -200,12 +200,13 @@ appContent.addEventListener("submit", (event) => {
 
 const upsertWord = (data) => {
   const value = JSON.parse(localStorage.getItem(data.id));
+  //edit = 수정할때 setWords: 추가할때
   null !== value ? editWord(data) : setWords(data);
 };
 
 const editWord = ({ id, ...data }) => {
   localStorage.setItem(id, JSON.stringify(data));
-  // 수정된 값이 inputBox가 아닌 text가 보여져야함 // Apr.19
+  render();
 };
 
 // 삭제 버튼
