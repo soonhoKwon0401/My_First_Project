@@ -58,8 +58,15 @@ const createWordCardHeader = ({ id, actionMenu }) =>
   `
     <div class="content__container__header" data-id="${id}">
       <span class="content__numbers">${id}</span>
-      ${actionMenu ? createWordCardSideMenu() : ""}
+      ${actionMenu ? createWordCardSideMenu() : createCancelButton()}
     </div>
+  `;
+const createCancelButton = () =>
+  `
+  <button class="content__container__header__cancel-button"
+  data-edit="cancel"
+  >
+  취소 </button>
   `;
 
 const wordCards = (id) => {
@@ -252,6 +259,14 @@ const setWords = ({ sentence, mean }) => {
   };
   localStorage.setItem(id, JSON.stringify(data));
 };
+
+//취소 버튼
+appContent.addEventListener("click", (event) => {
+  const test = event.target.closest(`[data-edit="cancel"]`);
+  if (!test) return;
+  console.log(test);
+  //취소 버튼 만들기
+});
 
 goToAddPage.addEventListener("click", (event) => {
   const linkEl = event.target.closest("[data-link]");

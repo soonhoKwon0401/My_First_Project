@@ -103,6 +103,10 @@ body {
   justify-content: space-between;
 }
 
+.content__container__header__cancel-button {
+  width: 60px;
+}
+
 .content__input-box__menu {
   display: flex;
 }
