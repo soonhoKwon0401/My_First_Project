@@ -61,6 +61,7 @@ const createWordCardHeader = ({ id, actionMenu }) =>
       ${actionMenu ? createWordCardSideMenu() : createCancelButton()}
     </div>
   `;
+
 const createCancelButton = () =>
   `
   <button class="content__container__header__cancel-button"
@@ -91,14 +92,10 @@ const wordCards = (id) => {
   return `<div class="app__content__cards__inner"> ${cardsHTML} </div>`;
 };
 
-const createWordCardSideMenuDeleteButton = `
-  <button class="content__cancel-button">취소</button>
-  `;
-
 const createWordCardAdd = () => `
     <div class="add__content__container">
       <h2 class="add__content-title">단어를 추가해보세요</h2>
-      <button type="button" class="add__content__button" data-link="/add">
+      <button type="button" class="add__content__button" data-link="/edit">
         추가하기
       </button>
     </div>
@@ -163,7 +160,7 @@ const renderBody = {
 
 const routes = {
   "/": () => renderBody.add(),
-  "/add": () => renderBody.edit({ ...initialState, mode: "edit" }),
+  "/edit": () => renderBody.edit({ ...initialState, mode: "edit" }),
   "/library": () => renderBody.lists(),
 };
 
@@ -264,10 +261,10 @@ const setWords = ({ sentence, mean }) => {
 appContent.addEventListener("click", (event) => {
   const test = event.target.closest(`[data-edit="cancel"]`);
   if (!test) return;
-  console.log(test);
-  //취소 버튼 만들기
+  render();
 });
 
+// 추가하기 버튼
 goToAddPage.addEventListener("click", (event) => {
   const linkEl = event.target.closest("[data-link]");
   if (!linkEl) return;
